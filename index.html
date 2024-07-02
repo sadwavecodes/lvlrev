@@ -9,105 +9,12 @@
   <title>Geometry Dash Level Requests Reviews</title>
   <link rel="icon" type="image/png" href="mod button.ico">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Inline CSS for the level lists */
-    .level-list {
-      background-color: #c15d2e;
-      padding: 10px;
-      border-radius: 15px;
-      width: 80%;
-      margin: 20px auto;
-    }
-
-    .level-item {
-      display: flex;
-      align-items: center;
-      background-color: #884125;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      color: white;
-      font-family: 'pusab', Verdana, Geneva, Tahona, sans-serif;
-    }
-
-    .level-item img {
-      max-width: 50px;
-      max-height: 50px;
-      margin-right: 10px;
-    }
-
-    .level-details {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .level-link a {
-      color: #c15d2e;
-      text-decoration: none;
-    }
-
-    .search-container {
-      display: flex;
-      justify-content: center;
-      margin: 20px auto;
-      width: 80%;
-    }
-
-    .search-container input[type="text"] {
-      padding: 10px;
-      border-radius: 15px;
-      border: none;
-      font-size: 18px;
-      width: 100%;
-      background-color: #ffffff;
-      color: black;
-      font-family: 'pusab', Verdana, Geneva, Tahona, sans-serif;
-    }
-
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-    }
-
-    .modal-content {
-      background-color: #fefefe;
-      margin: 15% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      max-height: 70%;
-      overflow-y: scroll;
-    }
-
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
   <div class="corner1">
     <img src="corner.png">
   </div>
-  
+
   <div class="corner2">
     <img src="corner.png">
   </div>
@@ -119,7 +26,7 @@
   <div class="corner4">
     <img src="corner.png">
   </div>
-  
+
   <div class="gd">
     <img src="logo - Geometry Dash.png">
   </div>
@@ -132,13 +39,13 @@
 
   <!-- Level List 1 -->
   <div class="level-list">
-    <div class="level-item" data-name="Lightwork" data-id="106976301">
+    <div class="level-item" data-name="Lightwork" data-id="106976301" data-message="This is a custom message for Lightwork.">
       <img id="difface" src="https://sadwave.cloud/easydemon.webp" alt="Easy Demon">
       <div class="level-details">
         <span>Name: Lightwork</span>
         <span>ID: 106976301</span>
         <div class="level-link">
-          <a href="#" class="level-link" data-name="Lightwork" data-id="106976301">Link</a>
+          <a href="/Lightwork" class="level-link">Link</a>
         </div>
       </div>
     </div>
@@ -146,19 +53,17 @@
 
   <!-- Level List 2 -->
   <div class="level-list">
-    <div class="level-item" data-name="Placeholder" data-id="123456789">
+    <div class="level-item" data-name="Placeholder" data-id="123456789" data-message="This is a custom message for Placeholder.">
       <img id="difface" src="https://sadwave.cloud/IMG_2838.webp" alt="Normal">
       <div class="level-details">
         <span>Name: Placeholder</span>
         <span>ID: 123456789</span>
         <div class="level-link">
-          <a href="#" class="level-link" data-name="Placeholder" data-id="123456789">Link</a>
+          <a href="/Placeholder" class="level-link">Link</a>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Add more level lists as needed -->
 
   <!-- The Modal -->
   <div id="myModal" class="modal">
@@ -170,88 +75,6 @@
     </div>
   </div>
 
-  <script>
-    // Function to open the modal
-    function openModal(content) {
-      document.getElementById('modal-body').innerHTML = content;
-      document.getElementById('myModal').style.display = "block";
-    }
-
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
-      history.pushState(null, null, '/'); // Reset URL
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-        history.pushState(null, null, '/'); // Reset URL
-      }
-    }
-
-    // Function to handle link clicks
-    document.querySelectorAll('.level-link').forEach(function(link) {
-      link.addEventListener('click', function(event) {
-        event.preventDefault();
-        var levelName = this.getAttribute('data-name');
-        var levelId = this.getAttribute('data-id');
-        var content = `<h2>${levelName}</h2><p>ID: ${levelId}</p><p>More content here...</p>`;
-        openModal(content);
-        history.pushState(null, null, `/${levelName}`);
-      });
-    });
-
-    // Check if URL matches a level link and open the modal if it does
-    window.onload = function() {
-      var path = window.location.pathname.substring(1); // Remove leading "/"
-      if (path) {
-        document.querySelectorAll('.level-item').forEach(function(item) {
-          if (item.getAttribute('data-name').toLowerCase() === path.toLowerCase()) {
-            var levelName = item.getAttribute('data-name');
-            var levelId = item.getAttribute('data-id');
-            var content = `<h2>${levelName}</h2><p>ID: ${levelId}</p><p>More content here...</p>`;
-            openModal(content);
-          }
-        });
-      }
-    }
-
-    // Search functionality
-    document.getElementById('search-input').addEventListener('input', function() {
-      var input = this.value.toLowerCase();
-      var levelLists = document.querySelectorAll('.level-list');
-      
-      levelLists.forEach(function(list) {
-        var levelItems = list.querySelectorAll('.level-item');
-        var hasVisibleItems = false;
-
-        levelItems.forEach(function(item) {
-          var name = item.getAttribute('data-name').toLowerCase();
-          var id = item.getAttribute('data-id').toLowerCase();
-          
-          if (name.includes(input) || id.includes(input)) {
-            item.style.display = 'flex';
-            hasVisibleItems = true;
-          } else {
-            item.style.display = 'none';
-          }
-        });
-
-        if (hasVisibleItems) {
-          list.style.display = 'block';
-        } else {
-          list.style.display = 'none';
-        }
-      });
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
